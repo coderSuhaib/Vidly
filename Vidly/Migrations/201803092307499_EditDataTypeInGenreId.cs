@@ -7,30 +7,30 @@ namespace Vidly.Migrations
     {
         public override void Up()
         {
-            DropForeignKey("dbo.Movies", "Genre_Id", "dbo.Genres");
-            DropIndex("dbo.Movies", new[] { "Genre_Id" });
-            DropColumn("dbo.Movies", "GenreId");
-            RenameColumn(table: "dbo.Movies", name: "Genre_Id", newName: "GenreId");
+            DropForeignKey("dbo.s", "Genre_Id", "dbo.Genres");
+            DropIndex("dbo.s", new[] { "Genre_Id" });
+            DropColumn("dbo.s", "GenreId");
+            RenameColumn(table: "dbo.s", name: "Genre_Id", newName: "GenreId");
             DropPrimaryKey("dbo.Genres");
-            AlterColumn("dbo.Movies", "GenreId", c => c.Byte(nullable: false));
+            AlterColumn("dbo.s", "GenreId", c => c.Byte(nullable: false));
             AlterColumn("dbo.Genres", "Id", c => c.Byte(nullable: false));
             AddPrimaryKey("dbo.Genres", "Id");
-            CreateIndex("dbo.Movies", "GenreId");
-            AddForeignKey("dbo.Movies", "GenreId", "dbo.Genres", "Id", cascadeDelete: true);
+            CreateIndex("dbo.s", "GenreId");
+            AddForeignKey("dbo.s", "GenreId", "dbo.Genres", "Id", cascadeDelete: true);
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Movies", "GenreId", "dbo.Genres");
-            DropIndex("dbo.Movies", new[] { "GenreId" });
+            DropForeignKey("dbo.s", "GenreId", "dbo.Genres");
+            DropIndex("dbo.s", new[] { "GenreId" });
             DropPrimaryKey("dbo.Genres");
             AlterColumn("dbo.Genres", "Id", c => c.Int(nullable: false, identity: true));
-            AlterColumn("dbo.Movies", "GenreId", c => c.Int());
+            AlterColumn("dbo.s", "GenreId", c => c.Int());
             AddPrimaryKey("dbo.Genres", "Id");
-            RenameColumn(table: "dbo.Movies", name: "GenreId", newName: "Genre_Id");
-            AddColumn("dbo.Movies", "GenreId", c => c.Byte(nullable: false));
-            CreateIndex("dbo.Movies", "Genre_Id");
-            AddForeignKey("dbo.Movies", "Genre_Id", "dbo.Genres", "Id");
+            RenameColumn(table: "dbo.s", name: "GenreId", newName: "Genre_Id");
+            AddColumn("dbo.s", "GenreId", c => c.Byte(nullable: false));
+            CreateIndex("dbo.s", "Genre_Id");
+            AddForeignKey("dbo.s", "Genre_Id", "dbo.Genres", "Id");
         }
     }
 }
